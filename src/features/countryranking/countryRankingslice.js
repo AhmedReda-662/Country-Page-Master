@@ -15,7 +15,7 @@ const countryRankingSlice = createSlice({
       const sortBy = action.payload;
       state.countryRank.sort((a, b) => {
         if (sortBy === "name") {
-          return a.name.localeCompare(b.name);
+          return a.name.common.localeCompare(b.name.common);
         } else if (sortBy === "population") {
           return b.population - a.population;
         } else {
