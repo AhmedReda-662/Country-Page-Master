@@ -1,0 +1,15 @@
+import { Outlet } from "react-router-dom";
+
+export default function AppLayout() {
+  return (
+    <main className="h-screen bg-dark-primary">
+      <div className="logo bg-[url('/hero-image.jpg')] h-80 bg-cover bg-center flex items-center justify-center">
+        <h1>
+          <img src="/Logo.svg" alt="logo" />
+          World <span>Ranks</span>
+        </h1>
+      </div>
+      <Outlet />
+    </main>
+  );
+}
