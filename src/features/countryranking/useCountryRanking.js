@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getAllCountries } from "../../service/apiCountry";
 import { useDispatch } from "react-redux";
-import { setCountries } from "../../redux/countrySlice";
+import { setCountries } from "./countryRankingslice";
 import { useEffect } from "react";
 
 export function useCountryRanking() {

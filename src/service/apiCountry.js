@@ -5,6 +5,9 @@ export const getAllCountries = async () => {
     const response = await fetch(
       `${BASE_URL}/all?fields=flags,name,population,area,region`,
     );
+    if (!response.ok) {
+      throw new Error(`Failed to fetch countries`);
+    }
     const data = await response.json();
     return data;
   } catch (err) {
@@ -15,8 +18,11 @@ export const getAllCountries = async () => {
 export const getCountryByName = async (countryName) => {
   try {
     const response = await fetch(
-      `${BASE_URL}/name/${countryName}?fullText=true`,
+      `${BASE_URL}/name/${encodeURIComponent(countryName)}?fullText=true`,
     );
+    if (!response.ok) {
+      throw new Error(`Country not found: ${countryName}`);
+    }
     const data = await response.json();
     return data;
   } catch (err) {
