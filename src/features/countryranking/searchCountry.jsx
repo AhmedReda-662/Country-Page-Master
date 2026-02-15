@@ -21,6 +21,7 @@ export default function SearchBar() {
         type="search"
         required
         placeholder="Search by Name,Region,Subregion"
+        className="placeholder:text-gray-secondary"
       />
     </label>
   );
