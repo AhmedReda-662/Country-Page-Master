@@ -7,26 +7,33 @@ import Status from "./UI/Status";
 
 export default function CountryRanking() {
   const { data, isLoading } = useCountryRanking();
+
   let [searchParams] = useSearchParams();
   if (isLoading) {
     return <Spinner />;
   }
 
   const sortBy = searchParams.get("sortBy") || "Population";
+  const regions = searchParams.getAll("region");
+
+  let dataCopy = [...data];
   if (sortBy === "Population") {
-    data.sort((a, b) => b.population - a.population);
+    dataCopy.sort((a, b) => b.population - a.population);
   } else if (sortBy === "Area") {
-    data.sort((a, b) => b.area - a.area);
+    dataCopy.sort((a, b) => b.area - a.area);
   } else {
-    data.sort((a, b) => a.name.common.localeCompare(b.name.common));
+    dataCopy.sort((a, b) => a.name.common.localeCompare(b.name.common));
+  }
+  if (regions.length > 0) {
+    dataCopy = dataCopy.filter((country) => regions.includes(country.region));
   }
 
   return (
     <div className="h-full px-3">
-      <Status found={data.length} />
+      <Status found={dataCopy.length} />
       <div className="flex gap-5 mt-10 h-full min-h-0 overflow-hidden">
         <Operation />
-        <Table data={data} />
+        <Table data={dataCopy} />
       </div>
     </div>
   );
