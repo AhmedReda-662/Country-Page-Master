@@ -6,15 +6,17 @@ import Spinner from "./UI/Spinner";
 import Status from "./UI/Status";
 
 export default function CountryRanking() {
-  const { data, isLoading } = useCountryRanking();
-
   let [searchParams] = useSearchParams();
-  if (isLoading) {
-    return <Spinner />;
-  }
 
   const sortBy = searchParams.get("sortBy") || "Population";
   const regions = searchParams.getAll("region");
+  const status = searchParams.get("status");
+
+  const { data, isLoading } = useCountryRanking(status);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   let dataCopy = [...data];
   if (sortBy === "Population") {

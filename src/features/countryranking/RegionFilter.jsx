@@ -3,6 +3,7 @@ const REGIONS = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
 export default function RegionFilter() {
   let [searchParams, setSearchParams] = useSearchParams();
   let regions = searchParams.getAll("region");
+
   function handleRegionChange(region) {
     setSearchParams((searchParams) => {
       if (regions.includes(region)) {
@@ -15,6 +16,7 @@ export default function RegionFilter() {
       return searchParams;
     });
   }
+
   return (
     <div>
       <p className="text-gray-secondary text-xs mb-3">Region</p>

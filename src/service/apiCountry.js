@@ -1,10 +1,13 @@
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-export const getAllCountries = async () => {
+export const getAllCountries = async (status) => {
+  let url = `${BASE_URL}/all?fields=flags,name,population,area,region`;
+  if (status !== undefined && status !== null) {
+    status = status === "member" ? true : false;
+    url = `${BASE_URL}/independent?status=${status}&fields=flags,name,population,area,region`;
+  }
   try {
-    const response = await fetch(
-      `${BASE_URL}/all?fields=flags,name,population,area,region`,
-    );
+    const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`Failed to fetch countries`);
     }
@@ -12,20 +15,5 @@ export const getAllCountries = async () => {
     return data;
   } catch (err) {
     throw new Error(`Failed to fetch countries: ${err.message}`);
-  }
-};
-
-export const getCountryByName = async (countryName) => {
-  try {
-    const response = await fetch(
-      `${BASE_URL}/name/${encodeURIComponent(countryName)}?fullText=true`,
-    );
-    if (!response.ok) {
-      throw new Error(`Country not found: ${countryName}`);
-    }
-    const data = await response.json();
-    return data;
-  } catch (err) {
-    throw new Error(`Failed to fetch country details: ${err.message}`);
   }
 };
