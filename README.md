@@ -120,18 +120,6 @@ The app will be available at `http://localhost:5173` by default.
 
 ---
 
-## Environment Variables
-
-Create a `.env` file in the project root with the following variable:
-
-```env
-VITE_BASE_URL=https://restcountries.com/v3.1
-```
-
-The application uses this base URL to call the REST Countries API endpoints.
-
----
-
 ## Available Scripts
 
 | Command           | Description                       |
