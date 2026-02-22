@@ -17,3 +17,19 @@ export const getAllCountries = async (status) => {
     throw new Error(`Failed to fetch countries: ${err.message}`);
   }
 };
+
+export const getCountryByName = async (countryName) => {
+  const url = `${BASE_URL}/name/${countryName}?fullText=true&fields=flags,name,population,area,region,capital,subregion,languages,currencies,continents`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch country with name: ${countryName}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    throw new Error(
+      `Failed to fetch country with name ${countryName}: ${err.message}`,
+    );
+  }
+};

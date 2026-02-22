@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Table({ data }) {
   return (
     <div className="flex-1 overflow-y-auto h-full min-h-0">
@@ -18,11 +20,13 @@ export default function Table({ data }) {
               return (
                 <tr key={country.name.common} className="text-gray-secondary">
                   <td>
-                    <img
-                      src={country.flags.png}
-                      alt={country.name.common + " flag"}
-                      className="w-16 h-10 object-cover rounded-md"
-                    />
+                    <Link to={`/country/${country.name.common}`}>
+                      <img
+                        src={country.flags.png}
+                        alt={country.name.common + " flag"}
+                        className="w-16 h-10 object-cover rounded-md"
+                      />
+                    </Link>
                   </td>
                   <td>{country.name.common}</td>
                   <td>{country.population.toLocaleString()}</td>
